@@ -116,7 +116,8 @@
             initCaps: false,
             placement: 'bottom',
             container:'body',
-            trigger: 'focus'
+            trigger: 'focus',
+            afterKeypress: function() {},
         }, options);
         if (!settings.layout) {
             if (($(this).attr('type') === 'tel' && $(this).hasClass('keyboard-numpad')) || settings.type === 'numpad') {
@@ -156,6 +157,8 @@
             }
             parent.val(currentContent);
             keyboardShiftify();
+            if ($.isFunction(settings.afterKeypress)) 
+				settings.afterKeypress(); 
             parent.focus();
         };
         $(document).off('touchstart', '.jqbtk-row .btn');
